@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd"
+    default-lazy-init="true">
+
+    <bean id="appDirectory" class="de.ep3.ftpc.AppDirectory" />
+
+    <!-- Controllers -->
+
+    <bean id="exceptionController" class="de.ep3.ftpc.controller.ExceptionController" />
+
+    <bean id="portalFrameController" class="de.ep3.ftpc.controller.portal.FrameController"
+        parent="abstractController">
+        <constructor-arg ref="portalFrame" />
+        <constructor-arg ref="statusManager" />
+    </bean>
+
+    <bean id="portalFrameMenuController" class="de.ep3.ftpc.controller.portal.FrameMenuController"
+        parent="abstractController">
+        <constructor-arg ref="portalFrame" />
+        <constructor-arg ref="configurationManager" />
+        <constructor-arg ref="serverListManager" />
+    </bean>
+
+    <bean id="portalServerListController" class="de.ep3.ftpc.controller.portal.ServerListController"
+        parent="abstractController">
+        <constructor-arg ref="serverListPanel" />
+        <constructor-arg ref="serverListManager" />
+    </bean>
+
+    <bean id="portalServerSettingsController" class="de.ep3.ftpc.controller.portal.ServerSettingsController"
+        parent="abstractController" scope="prototype">
+        <constructor-arg ref="portalFrame" />
+        <constructor-arg ref="serverSettingsDialog" />
+        <constructor-arg ref="serverList" />
+    </bean>
+
+    <bean id="portalCrawlerSettingsController" class="de.ep3.ftpc.controller.portal.CrawlerSettingsController"
+        parent="abstractController">
+        <constructor-arg ref="crawlerSettingsPanel" />
+        <constructor-arg ref="serverListManager" />
+    </bean>
+
+    <bean id="portalCrawlerResultsController" class="de.ep3.ftpc.controller.portal.CrawlerResultsController"
+        parent="abstractController">
+        <constructor-arg ref="portalCrawlerDownloadController" />
+        <constructor-arg ref="crawlerResultsPanel" />
+        <constructor-arg ref="crawlerManager" />
+        <constructor-arg ref="statusManager" />
+        <constructor-arg ref="configurationManager" />
+    </bean>
+
+    <bean id="portalCrawlerController" class="de.ep3.ftpc.controller.portal.CrawlerController"
+        parent="abstractController">
+        <constructor-arg ref="serverListPanel" />
+        <constructor-arg ref="crawlerSettingsPanel" />
+        <constructor-arg ref="crawlerResultsPanel" />
+        <constructor-arg ref="serverListManager" />
+        <constructor-arg ref="crawlerManager" />
+    </bean>
+
+    <bean id="portalCrawlerDownloadController" class="de.ep3.ftpc.controller.portal.CrawlerDownloadController"
+        parent="abstractController">
+        <constructor-arg ref="portalFrame" />
+    </bean>
+
+    <bean id="settingsController" class="de.ep3.ftpc.controller.SettingsController"
+        parent="abstractController" scope="prototype">
+        <constructor-arg ref="portalFrame" />
+        <constructor-arg ref="settingsDialog" />
+        <constructor-arg ref="configurationManager" />
+    </bean>
+
+    <bean id="aboutController" class="de.ep3.ftpc.controller.AboutController"
+        parent="abstractController" scope="prototype">
+        <constructor-arg ref="portalFrame" />
+        <constructor-arg ref="aboutDialog" />
+    </bean>
+
+    <bean id="abstractController" class="de.ep3.ftpc.controller.AbstractController" abstract="true">
+        <property name="i18nManager" ref="i18nManager"/>
+        <property name="statusManager" ref="statusManager"/>
+    </bean>
+
+    <!-- Views -->
+
+    <bean id="portalFrame" class="de.ep3.ftpc.view.portal.PortalFrame">
+        <constructor-arg ref="portalMenu" />
+        <constructor-arg ref="portalPanel" />
+        <constructor-arg ref="portalStatusBar" />
+        <constructor-arg ref="configuration" />
+        <constructor-arg ref="uiDesigner" />
+    </bean>
+
+    <bean id="portalMenu" class="de.ep3.ftpc.view.portal.PortalMenu">
+        <constructor-arg ref="configuration" />
+        <constructor-arg ref="i18nManager" />
+    </bean>
+
+    <bean id="portalPanel" class="de.ep3.ftpc.view.portal.PortalPanel">
+        <constructor-arg ref="serverListPanel" />
+        <constructor-arg ref="crawlerSettingsPanel" />
+        <constructor-arg ref="crawlerResultsPanel" />
+        <constructor-arg ref="arrowDesigner" />
+    </bean>
+
+    <bean id="portalStatusBar" class="de.ep3.ftpc.view.portal.PortalStatusBar">
+        <constructor-arg ref="uiDesigner" />
+    </bean>
+
+    <bean id="serverListPanel" class="de.ep3.ftpc.view.core.ServerListPanel">
+        <constructor-arg ref="serverList" />
+        <constructor-arg ref="i18nManager" />
+        <constructor-arg ref="uiDesigner" />
+    </bean>
+
+    <bean id="serverSettingsPanel" class="de.ep3.ftpc.view.core.ServerSettingsPanel" scope="prototype">
+        <constructor-arg ref="i18nManager" />
+    </bean>
+
+    <bean id="serverSettingsDialog" class="de.ep3.ftpc.view.core.ServerSettingsDialog" scope="prototype">
+        <constructor-arg ref="portalFrame" />
+        <constructor-arg ref="serverSettingsPanel" />
+        <constructor-arg ref="i18nManager" />
+        <constructor-arg ref="uiDesigner" />
+    </bean>
+
+    <bean id="crawlerSettingsPanel" class="de.ep3.ftpc.view.core.CrawlerSettingsPanel">
+        <constructor-arg ref="serverList" />
+        <constructor-arg ref="i18nManager" />
+        <constructor-arg ref="uiDesigner" />
+    </bean>
+
+    <bean id="crawlerResultsPanel" class="de.ep3.ftpc.view.core.CrawlerResultsPanel">
+        <constructor-arg ref="i18nManager" />
+        <constructor-arg ref="uiDesigner" />
+    </bean>
+
+    <bean id="settingsPanel" class="de.ep3.ftpc.view.settings.SettingsPanel" scope="prototype">
+        <constructor-arg ref="configuration" />
+        <constructor-arg ref="i18nManager" />
+    </bean>
+
+    <bean id="settingsDialog" class="de.ep3.ftpc.view.settings.SettingsDialog" scope="prototype">
+        <constructor-arg ref="portalFrame" />
+        <constructor-arg ref="settingsPanel" />
+        <constructor-arg ref="i18nManager" />
+        <constructor-arg ref="uiDesigner" />
+    </bean>
+
+    <bean id="aboutPanel" class="de.ep3.ftpc.view.about.AboutPanel" scope="prototype">
+        <constructor-arg ref="i18nManager" />
+        <constructor-arg ref="uiDesigner" />
+        <constructor-arg ref="configuration" />
+    </bean>
+
+    <bean id="aboutDialog" class="de.ep3.ftpc.view.about.AboutDialog" scope="prototype">
+        <constructor-arg ref="portalFrame" />
+        <constructor-arg ref="aboutPanel" />
+        <constructor-arg ref="i18nManager" />
+        <constructor-arg ref="uiDesigner" />
+    </bean>
+
+    <bean id="arrowDesigner" class="de.ep3.ftpc.view.designer.ArrowDesigner">
+        <constructor-arg ref="uiDesigner" />
+    </bean>
+
+    <bean id="uiDesigner" class="de.ep3.ftpc.view.designer.UIDesigner" />
+
+    <!-- Models -->
+
+    <bean id="printer" class="de.ep3.ftpc.model.Printer">
+        <constructor-arg ref="crawlerResultsPanel" />
+    </bean>
+
+    <bean id="crawler" class="de.ep3.ftpc.model.Crawler" />
+
+    <bean id="crawlerManager" class="de.ep3.ftpc.model.CrawlerManager">
+        <constructor-arg ref="crawler" />
+        <constructor-arg ref="i18nManager" />
+    </bean>
+
+    <bean id="statusManager" class="de.ep3.ftpc.model.StatusManager">
+        <constructor-arg ref="portalStatusBar" />
+        <constructor-arg ref="i18nManager" />
+    </bean>
+
+    <bean id="serverListManager" class="de.ep3.ftpc.model.ServerListManager">
+        <constructor-arg ref="serverList" />
+        <constructor-arg ref="appDirectory" />
+    </bean>
+
+    <bean id="serverList" class="de.ep3.ftpc.model.ServerListFactory" factory-method="createInstance">
+        <constructor-arg ref="appDirectory" />
+    </bean>
+
+    <bean id="dateFormatter" class="de.ep3.ftpc.model.i18n.DateFormatterFactory" factory-method="createInstance">
+        <constructor-arg ref="translator" />
+        <constructor-arg ref="locale" />
+    </bean>
+
+    <bean id="i18nManager" class="de.ep3.ftpc.model.i18n.I18nManager">
+        <constructor-arg ref="translator" />
+        <constructor-arg ref="dateFormatter" />
+    </bean>
+
+    <bean id="translator" class="de.ep3.ftpc.model.i18n.Translator">
+        <constructor-arg ref="textResourceBundle" />
+    </bean>
+
+    <bean id="textResourceBundle" class="de.ep3.ftpc.model.i18n.resource.TextBundleFactory" factory-method="createInstance">
+        <constructor-arg ref="locale" />
+    </bean>
+
+    <bean id="locale" class="de.ep3.ftpc.model.i18n.LocaleFactory" factory-method="createInstance">
+        <constructor-arg ref="configuration" />
+    </bean>
+
+    <bean id="configurationManager" class="de.ep3.ftpc.model.ConfigurationManager">
+        <constructor-arg ref="configuration" />
+        <constructor-arg ref="appDirectory" />
+    </bean>
+
+    <bean id="configuration" class="de.ep3.ftpc.model.ConfigurationFactory" factory-method="createInstance">
+        <constructor-arg ref="appDirectory" />
+    </bean>
+
+</beans>

@@ -1,0 +1,11 @@
+/.gradle/
+/.idea/
+/.project/
+/build/
+/.settings/
+/nbproject/
+
+Desktop.ini
+Thumbs.db
+
+.DS_Store
