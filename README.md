@@ -33,7 +33,8 @@ The FTP Crawler is licensed under the GNU GPL v3.0 open source license.
 The FTP Crawler requires **Java 1.7+** and should run on most platforms supporting the Java Runtime Environment.
 
 This repository is for the Java source files. If you just want to *use* the program you can download compiled
-and packed binaries from the [project website] (http://www.ep-3.de/projekte/ftpc).
+and packed binaries from the [project website] (http://www.ep-3.de/projekte/ftpc) (german!) or via the
+[GitHub Release] (https://github.com/tkrebs/ftpc/releases) (just as good).
 
 The application is based on the following libraries (for developers):
 - Spring Framework 4 (primarily for its *Dependency Injection Container*)
