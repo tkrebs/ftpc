@@ -218,14 +218,11 @@ public class CrawlerThread extends Thread
                     case "image-custom":
                         try {
                             crawlerResult.generatePreview();
-                        } catch (IOException e) {
-                            crawlerResult.setPreviewPercentage(100); // But no preview image :'(
-                        }
-                        break;
-                    default:
-                        crawlerResult.setPreviewPercentage(100);
+                        } catch (IOException e) { }
                         break;
                 }
+
+                crawlerResult.setPreviewPercentage(100);
             }
         }
     }

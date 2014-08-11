@@ -91,6 +91,9 @@ public class CrawlerResult
                 if (i % 1024 == 0) {
                     int progress = Math.round((((float) i) / file.getSize()) * 100);
 
+                    // Limit the progress to 99%, since preview generation is about to follow
+                    progress = Math.min(progress, 99);
+
                     setPreviewPercentage(progress);
                 }
             }
@@ -104,9 +107,13 @@ public class CrawlerResult
 
             /* Generate preview image */
 
-            BufferedImage image = ImageIO.read(new ByteArrayInputStream(rawFile));
+            InputStream bis = new ByteArrayInputStream(rawFile);
 
-            if (image != null) {
+            BufferedImage image = ImageIO.read(bis);
+
+            if (image == null) {
+                bis.close();
+            } else {
                 imageWidth = image.getWidth();
                 imageHeight = image.getHeight();
 
@@ -132,8 +139,6 @@ public class CrawlerResult
 
                 setPreview(image);
             }
-
-            setPreviewPercentage(100);
         }
     }
 
