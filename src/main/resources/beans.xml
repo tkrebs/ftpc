@@ -172,8 +172,9 @@
 
     <!-- Models -->
 
-    <bean id="printer" class="de.ep3.ftpc.model.Printer">
+    <bean id="crawlerPrinter" class="de.ep3.ftpc.model.CrawlerPrinter">
         <constructor-arg ref="crawlerResultsPanel" />
+        <constructor-arg ref="i18nManager" />
     </bean>
 
     <bean id="crawler" class="de.ep3.ftpc.model.Crawler" />

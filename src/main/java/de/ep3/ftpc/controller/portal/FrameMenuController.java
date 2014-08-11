@@ -72,7 +72,7 @@ public class FrameMenuController extends AbstractController implements ActionLis
 
                 if (pj.printDialog()) {
                     try {
-                        Printable printer = App.getContext().getBean("printer", Printable.class);
+                        Printable printer = App.getContext().getBean("crawlerPrinter", Printable.class);
 
                         pj.setPrintable(printer);
                         pj.print();

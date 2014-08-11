@@ -35,6 +35,7 @@ public class CrawlerResultsPanel extends JPanel implements ActionListener
     private UIDesigner uiDesigner;
 
     private JScrollPane scrollPane;
+    private JPanel resultsPanel;
 
     private int animationDelay = 50;
     private Timer animationTimer;
@@ -84,7 +85,7 @@ public class CrawlerResultsPanel extends JPanel implements ActionListener
 
         /* Setup scroll pane panel */
 
-        JPanel resultsPanel = new JPanel();
+        resultsPanel = new JPanel();
         resultsPanel.setLayout(new MigLayout("fillx, wrap 2, gap unrelated", "[sizegroup s][sizegroup s]"));
 
         /* Setup scroll pane */
@@ -102,6 +103,11 @@ public class CrawlerResultsPanel extends JPanel implements ActionListener
     public JScrollPane getScrollPane()
     {
         return scrollPane;
+    }
+
+    public JPanel getResultsPanel()
+    {
+        return resultsPanel;
     }
 
     private synchronized void initializeAnimationObjects()

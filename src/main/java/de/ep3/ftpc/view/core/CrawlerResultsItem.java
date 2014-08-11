@@ -38,6 +38,7 @@ public class CrawlerResultsItem extends JPanel
     public CrawlerResultsItem(CrawlerResult result)
     {
         setLayout(new MigLayout("fillx, insets 0", "[min!][grow]", "[min!]"));
+        setOpaque(false);
 
         /* Result preview */
 
@@ -56,6 +57,7 @@ public class CrawlerResultsItem extends JPanel
         previewPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         previewPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         previewPanel.setCrawlerResult(result);
+        previewPanel.setOpaque(false);
         previewPanel.setLayout(new MigLayout("insets 0",
             String.format("[%spx!]", result.getPreviewSize() + 8),
             String.format("[%spx!]", result.getPreviewSize() + 8)));
@@ -77,6 +79,7 @@ public class CrawlerResultsItem extends JPanel
         sizeLabel.setForeground(Color.GRAY);
 
         JPanel infoPanel = new JPanel();
+        infoPanel.setOpaque(false);
         infoPanel.setLayout(new MigLayout("flowy, insets 0"));
 
         infoPanel.add(nameLabel, "width 95%");
