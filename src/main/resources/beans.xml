@@ -8,6 +8,8 @@
 
     <bean id="appDirectory" class="de.ep3.ftpc.AppDirectory" />
 
+    <bean id="currentDirectory" class="de.ep3.ftpc.CurrentDirectory" />
+
     <!-- Controllers -->
 
     <bean id="exceptionController" class="de.ep3.ftpc.controller.ExceptionController" />
@@ -196,6 +198,7 @@
 
     <bean id="serverList" class="de.ep3.ftpc.model.ServerListFactory" factory-method="createInstance">
         <constructor-arg ref="appDirectory" />
+        <constructor-arg ref="currentDirectory" />
     </bean>
 
     <bean id="dateFormatter" class="de.ep3.ftpc.model.i18n.DateFormatterFactory" factory-method="createInstance">

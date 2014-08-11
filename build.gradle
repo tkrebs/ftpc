@@ -6,7 +6,7 @@ version = '1.12'
 
 mainClassName = "de.ep3.ftpc.App"
 
-task jarFinal(type: Jar) {
+task jarFinal(type: Jar, dependsOn: build) {
     from files(sourceSets.main.output.classesDir)
     from files(sourceSets.main.output.resourcesDir)
     from { configurations.compile.collect { zipTree(it) } }

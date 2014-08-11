@@ -19,17 +19,28 @@
 package de.ep3.ftpc.model;
 
 import de.ep3.ftpc.AppDirectory;
+import de.ep3.ftpc.CurrentDirectory;
 
 import java.io.IOException;
 
 public class ServerListFactory
 {
 
-    public static ServerList createInstance(AppDirectory appDirectory)
+    public static ServerList createInstance(AppDirectory appDirectory, CurrentDirectory currentDirectory)
     {
         ServerList serverList;
 
-        if (appDirectory.exists("servers")) {
+        if (currentDirectory.exists("servers")) {
+            try {
+                serverList = (ServerList) currentDirectory.load("servers");
+
+                currentDirectory.rename("servers", "servers.imported");
+            } catch (ClassNotFoundException | IOException e) {
+                currentDirectory.rename("servers", "servers.corrupt");
+
+                throw new RuntimeException(e.getMessage());
+            }
+        } else if (appDirectory.exists("servers")) {
             try {
                 serverList = (ServerList) appDirectory.load("servers");
             } catch (ClassNotFoundException | IOException e) {
