@@ -144,7 +144,10 @@ public class CrawlerResult
 
     private BufferedImage generateImageToBuffered(Image image)
     {
-        BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        int bufferedImageWidth = Math.max(image.getWidth(null), 1);
+        int bufferedImageHeight = Math.max(image.getHeight(null), 1);
+
+        BufferedImage bufferedImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bufferedImage.createGraphics();
 
         g.drawImage(image, 0, 0, null);
